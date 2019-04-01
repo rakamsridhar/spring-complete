@@ -48,9 +48,10 @@ public class EmployeeServiceTest {
 		
 	    @Before
 	    public void setUp() throws Exception {
-	        //MockitoAnnotations.initMocks(this);
 	    }
-		@Ignore
+		
+	    
+	    //@Ignore
 	    @Test
 		public void testGetEmployees() throws SQLException {
 	    		when(daoMock.findAll()).thenReturn(getTestData());

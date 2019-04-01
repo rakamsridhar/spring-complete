@@ -22,11 +22,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
+//import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
@@ -52,37 +53,28 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest
-@WebMvcTest(controllers=EmployeeController.class)
-//@WithMockUser(username="user",roles={"USER","ADMIN"})
+@SpringBootTest
+@AutoConfigureMockMvc
 public class EmployeeControllerTest {
 
 		@Autowired
 	 	private MockMvc mockMvc;
-	    
-	    @Autowired
-	    protected WebApplicationContext wac;
-	  
-	    @Autowired
-	    private EmployeeController employeController;
-	  
-	    private List<Employee> employees;
+	   
+		private List<Employee> employees;
 	
 	    @MockBean
 		private EmployeeService service1;
 		
 	    @Before
 	    public void setup() throws Exception {
-	     //  this.mockMvc = webAppContextSetup(wac).build();// Standalone context
-	     //   this.mockMvc = standaloneSetup(this.employeController).build();// Standalone context
 	        this.employees  = getTestData();
 	    }
 	    
-		@Ignore
+		//@Ignore
 	    @Test
 		public void testGetEmployees() throws Exception {
 	    		when(service1.getEmploees()).thenReturn(employees);
-	    		mockMvc.perform(get("/employees")
+	    		mockMvc.perform(get("/employeess")
 //	    				.with(httpBasic("user", "password"))
 	    				.contentType(MediaType.APPLICATION_JSON))
 	             .andExpect(status().isOk())
